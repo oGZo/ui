@@ -119,7 +119,7 @@ const saveFile = async (ctx, next) => {
       console.log(toFilePath);
 
       await execCli(`unzip -f ${filePath} -d ${toFilePath}`);
-      await execCli(`rm ${filePath}`);
+    //   await execCli(`rm ${filePath}`);
       console.log('suc');
     }
     ctx.body = {
