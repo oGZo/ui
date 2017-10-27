@@ -4,7 +4,7 @@ const bodyParser = require('koa-bodyparser') //解析原始request请求,然后�
 const jwt = require('jsonwebtoken')
 const jwtKoa = require('koa-jwt')
 const util = require('util')
-const verify = util.promisify(jwt.verify) // 解密
+// const verify = util.promisify(jwt.verify) // 解密
 const secret = require('./config/token');
 const Router = require('koa-router'); //处理url映射
 const router = new Router(); //实例化了Router(),也可以在上一句的时候直接const Router = require('koa-router')().效果一样
