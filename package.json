@@ -11,7 +11,7 @@
     "sit": "npm run build -d sit",
     "prod": "npm run build -d prod",
     "stable": "npm run build -d stable",
-    "server": "supervisor  service/app.js",
+    "server": "node  service/app.js",
     "lint": "eslint --ext .js,.vue src"
   },
   "dependencies": {
