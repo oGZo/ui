@@ -1,0 +1,19 @@
+{
+    "kkl_user": [
+        {
+            "id": 1,
+            "name": "admin",
+            "pwd": "123456",
+            "status": 1
+        }
+    ],
+    "max_user_id": 1,
+    "max_project_id": 1,
+    "kkl_project": [
+        {
+            "id": 1,
+            "name": "阿拉丁",
+            "status": 1
+        }
+    ]
+}

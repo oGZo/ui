@@ -1,0 +1,100 @@
+
+//常用色
+@g-white: #fff; // 白色
+@g-black: #000000; // 黑色
+@g-main-orange: #FF9600;    // 橘黄色
+@g-main-green: #6EB92B;    // 绿色
+@g-main-red:  #FF3C4B;
+@g-main-light-green: #F0F8E9; // 淡绿色
+@g-main-gray: #D8D8D8;
+
+//背景色
+@g-bg-body: #f5f5f5;    //页面主背景
+@g-bg-menu: #f9fbfc;    //菜单背景
+@g-bg-search: #f1f1f1;  //搜索框背景
+@g-bg-disable: #d7d7d7; //禁止状态背景颜色
+
+//字体
+@g-font-dark-color: #333;    //字体深色
+@g-font-default-color: #666; //默认色
+@g-font-light-color: #999;     //字体浅色
+@g-font-light-color2: #888;     //字体浅色
+@g-font-light-color3: #999;     //字体浅色
+@g-font-tip-color: #a0a8b5;   //提示性文字
+@g-font-tip-color2: #b2b2b2;   //提示性文字
+@g-font-tip-color3: #ccc;   //提示性文字
+@g-placeholder-color:#aab0b8;   //表单占位符
+
+//字体大小
+@g-font-h1: 1rem;   //20
+@g-font-h2: .85rem; //17
+@g-font-h3: .8rem;  //16
+@g-font-h4: .7rem;  //14
+@g-font-h5: .55rem; //11
+@g-font-h6: .5rem;  //10
+
+//边框
+@g-border-color: #e5e5e5;               // 边框颜色
+@g-common-border-size: 0.05rem;   // 边框默认宽度
+
+//通用的左右边距
+@g-common-rl-padding: .6rem;
+
+//通用边框
+.g-border {
+    border: @g-common-border-size solid @g-border-color;
+}
+.g-border-top {
+    border-top: @g-common-border-size solid @g-border-color;
+}
+.g-border-right {
+    border-right: @g-common-border-size solid @g-border-color;
+}
+.g-border-bottom {
+    border-bottom: @g-common-border-size solid @g-border-color;
+}
+.g-border-left {
+    border-left: @g-common-border-size solid @g-border-color;
+}
+
+//通用外边距
+@g-margin: .5rem;
+.g-margin-top {
+    margin-top: @g-margin;
+}
+.g-margin-bottom {
+    margin-bottom: @g-margin;
+}
+
+//单行超出省略号
+.gSingleLine () {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.gLHeight(@h) {
+    line-height: @h;
+    height: @h;
+}
+
+.overflow-hidden {
+    overflow: hidden;
+}
+
+//自动换行(长英文单词、URL地址、一长串数字)
+.word-wrap {
+    word-break: break-all;
+    word-wrap: break-word;
+}
+//单行布局
+.line-nowrap {
+    white-space: nowrap;
+    width: 100%;
+    overflow-x: auto;
+}
+.verticalCenter {
+    display: flex;
+    align-items:center;
+    justify-content: center;
+}
