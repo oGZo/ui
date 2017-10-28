@@ -13,7 +13,7 @@ export default {
             projectName: '',
             projectId,
             loading: true,
-            action: `${CONFIG.url}/file/saveFile`
+            action: `${CONFIG.url || ''}/file/saveFile`
         };
     },
     created() {
