@@ -3,10 +3,10 @@ const path = require('path');
 
 const db = path.resolve(__dirname, './db.json');
 
-const query = async () => {
+const query = async() => {
     const result = await new Promise((resolve, reject) => {
         fs.readFile(db, 'utf-8', (err, data) => {
-            if(err){
+            if (err) {
                 return reject(err);
             }
             resolve(data);
@@ -15,11 +15,11 @@ const query = async () => {
     return result;
 };
 
-const write = async (data) => {
+const write = async(data) => {
     const str = JSON.stringify(data);
     const result = await new Promise((resolve, reject) => {
         fs.writeFile(db, str, (err, res) => {
-            if(err){
+            if (err) {
                 return reject(err);
             }
             resolve(res);
@@ -28,13 +28,13 @@ const write = async (data) => {
     return result;
 };
 
-const init = async () => {
+const init = async() => {
     let data = await query();
     console.log(data);
     data = JSON.parse(data);
 
 };
-init();
+// init();
 module.exports = {
     query,
     write

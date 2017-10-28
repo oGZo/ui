@@ -1,13 +1,13 @@
 const utils = require('../mysql/utils.js');
 // const secret = require('../config/token');
 
-const createProject = async (ctx) => {
-    const { name } = ctx.req.body;
+const addProject = async(ctx) => {
+    const { name } = ctx.request.body;
     let oldData = await utils.query();
     oldData = JSON.parse(oldData);
     console.log(oldData);
     let projects = oldData.kkl_project;
-    if(projects.some(project => project.name === name)){
+    if (projects.some(project => project.name === name)) {
         ctx.body = {
             code: 2,
             message: '该项目已存在'
@@ -16,33 +16,49 @@ const createProject = async (ctx) => {
     }
     const maxId = oldData.max_project_id + 1;
     const id = maxId;
-    const data = {
-        projectInfo: {
-            id,
-            name,
-            status: 1
-        },
-        token: 1
+    const nowTime = Date.now();
+    const creatorId = 1;
+    const projectInfo = {
+        id,
+        name,
+        creatorId,
+        status: 1,
+        createTime: nowTime,
+        updateTime: nowTime,
     };
+    const data = projectInfo;
+    oldData.kkl_project.push(projectInfo);
+    oldData.max_project_id = maxId;
+    await utils.write(oldData);
     ctx.body = {
         data,
         code: 1,
         message: '创建成功'
     };
 };
-const getProjectList = async (ctx) => {
+const getProjectList = async(ctx) => {
     let oldData = await utils.query();
     oldData = JSON.parse(oldData);
     console.log(oldData);
     let data = oldData.kkl_project;
+    let users = oldData.kkl_user;
+    data = data.filter(project => project.status === 1);
+    data.forEach(project => {
+        let { creatorId } = project;
+        let [user] = users.filter(u => u.id === creatorId);
+        project.creator = '';
+        if (user) {
+            project.creator = user.name;
+        }
+    });
     ctx.body = {
         data,
         code: 1,
-        message: '登录成功'
+        message: '获取成功'
     };
 };
 
 module.exports = {
-    post_createProject: createProject,
+    post_addProject: addProject,
     get_getProjectList: getProjectList,
 };

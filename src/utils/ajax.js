@@ -61,7 +61,8 @@ export function Ajax({
         'Content-Type': contentType,
         'KKL-TOKEN': KKL.cookie.get('kkl_token')
     };
-    let configUrl = CONFIG.url;
+    console.log(CONFIG);
+    let configUrl = CONFIG.url || '';
     if(ENV_CONFIG.env === 'dev'){
         // configUrl = `${location.protocol}//${location.hostname}:3004/`;
         configUrl = '/kkl/';

@@ -7,7 +7,7 @@ const routes = PAGE_LIST.map(page => {
     let component = () => System.import(`../pages/${name}/index.vue`);
     let children = [];
     // 针对二级子路由处理
-    if(Array.isArray(page.children) && page.children.length){
+    if (Array.isArray(page.children) && page.children.length) {
         page.children.forEach(child => {
             let comp = () => System.import(`../pages/${name}/children/${child.name}/index.vue`);
             children.push({
@@ -39,7 +39,7 @@ Vue.use(Router);
 const router = new Router({
     routes,
     base: '/',
-    mode: 'history',
+    mode: 'hash',
 });
 // router.beforeEach((to,from,next) => {
 //     if(to.name !== 'login' && !KKL.cookie.get('kkl_token')){
