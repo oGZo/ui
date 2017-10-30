@@ -41,13 +41,14 @@ const router = new Router({
     base: '/',
     mode: 'hash',
 });
-// router.beforeEach((to,from,next) => {
-//     if(to.name !== 'login' && !KKL.cookie.get('kkl_token')){
-//         return next({
-//             name: 'login'
-//         });
-//     }
-// });
+router.beforeEach((to,from,next) => {
+    if(to.name !== 'login' && !KKL.cookie.get('kkl_ui_token')){
+        return next({
+            name: 'login'
+        });
+    }
+    next();
+});
 export default router;
 // export default new Router({
 //     routes,

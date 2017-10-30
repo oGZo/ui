@@ -1,5 +1,6 @@
 const utils = require('../mysql/utils.js');
-// const secret = require('../config/token');
+const secret = require('../config/token');
+const jwt = require('jsonwebtoken')
 
 const register = async (ctx) => {
     const { name, pwd } = ctx.req.body;
@@ -37,6 +38,7 @@ const register = async (ctx) => {
 };
 const login = async (ctx, next) => {
     const { name, pwd } = ctx.request.body;
+
     let oldData = await utils.query();
     oldData = JSON.parse(oldData);
     console.log(oldData);
@@ -50,14 +52,18 @@ const login = async (ctx, next) => {
     }
     const maxUserId = oldData.max_user_id + 1;
     const id = maxUserId;
+    let userToken = {
+        id
+    };
+    const token = jwt.sign(userToken, secret, {expiresIn: '2400h'});  // token签名 有效期为1小时
     const data = {
+        token,
         userInfo: {
             id,
             pwd,
             name,
             status: 1
-        },
-        token: 1
+        }
     };
     ctx.body = {
         data,

@@ -25,8 +25,7 @@ export default {
             try{
                 const da = { name, pwd };
                 const data = await KKL.Ajax.post('user/login', da);
-                KKL.locatStorage.setItem('userInfo', JSON.stringify(da));
-                KKL.cookie.set('kkl_token', data.token);
+                KKL.cookie.set('kkl_ui_token', data.token);
                 this.$router.push({
                     name: 'index'
                 });

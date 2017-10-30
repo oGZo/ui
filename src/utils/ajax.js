@@ -56,13 +56,15 @@ export function Ajax({
         bin: 'multipart/form-data',
     };
     const contentType = methodMap[method] || 'application/x-www-form-urlencoded';
+    // let token = KKL.cookie.get('kkl_ui_token') || '';
+    // let Authorization = `Bearer ${token}`;
     // 处理token等信息
     const headers = {
+        // Authorization,
         'Content-Type': contentType,
-        'KKL-TOKEN': KKL.cookie.get('kkl_token')
     };
     console.log(CONFIG);
-    let configUrl = CONFIG.url || '';
+    let configUrl = CONFIG.url || '/';
     if(ENV_CONFIG.env === 'dev'){
         // configUrl = `${location.protocol}//${location.hostname}:3004/`;
         configUrl = '/kkl/';
