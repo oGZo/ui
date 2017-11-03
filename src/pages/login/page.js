@@ -33,10 +33,13 @@ export default {
                 this.$message.error(err.message);
             }
         } else {
-            this.$message.error('账号或密码错误');
+            // this.$message.error('账号或密码错误');
           return false;
         }
       });
+    },
+    enter() {
+        this.submitForm('ruleForm');
     },
     resetForm(formName) {
       this.$refs[formName].resetFields();

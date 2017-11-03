@@ -3,6 +3,7 @@ node_modules/
 dist/
 service/public/*
 service/uploadFile/*
+service/mysql/db.json
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
