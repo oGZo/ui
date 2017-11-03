@@ -4,7 +4,7 @@
     <el-input v-model="form.name" @keydown.native.enter="enter"></el-input>
   </el-form-item>
     <el-form-item label="密码" prop="pwd">
-    <el-input v-model="form.pwd" @keydown.native.enter="enter"></el-input>
+    <el-input v-model="form.pwd"  type="password" @keydown.native.enter="enter"></el-input>
   </el-form-item>
   <el-form-item>
     <el-button type="primary" class="login-btn" @click="submitForm('ruleForm')">登录</el-button>
