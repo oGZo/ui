@@ -25,7 +25,7 @@ async function uploadFile(Path, file) {
 const execCli = async cmd => {
     await new Promise((resolve, reject) => {
         childProcess.exec(cmd, (err, data) => {
-            console.log(111);
+            // console.log(111);
             if (err) {
                 return reject(err);
             }
@@ -151,7 +151,7 @@ const saveFile = async(ctx, next) => {
             await execCli(`rm ${filePath}`);
             await execCli(`rm ${catchFilePath}`);
             await execCli(`rm -rf ${toFilePath}/__MACOSX`);
-            console.log('suc');
+            // console.log('suc');
         }
         ctx.body = {
             data,
