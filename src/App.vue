@@ -4,7 +4,7 @@
             {{user.name}}，你好
             <span class="logout" @click="confirmLogin">退出</span>
         </div>
-        <div class="user-info" v-else @click="toLogin">你还未登录，点击<span class="login">登录</span></div>
+        <div class="user-info" v-else v-show="$route.name !== 'login'" @click="toLogin">你还未登录，点击<span class="login">登录</span></div>
         <router-view></router-view>
 
     </div>

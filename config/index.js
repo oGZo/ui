@@ -39,7 +39,7 @@ module.exports = {
                 // changeOrigin: true,
                 logLevel: 'debug',
                 pathRewrite: {
-                    '^/kkl/': ''
+                    '^/kkl': ''
                 },
             }
         },
