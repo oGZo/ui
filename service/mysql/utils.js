@@ -12,7 +12,7 @@ const initDB = {
         createTime: 1509118595429
     }],
     max_user_id: 1,
-    max_project_id: 1,
+    max_project_id: 0,
     kkl_project: []
 };
 const isExist = async(Path) => {
