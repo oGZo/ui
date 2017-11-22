@@ -24,7 +24,7 @@ export default {
     }
   },
   created () {
-      if(this.isLogin){
+    if(this.isLogin){
         this.$router.replace({
             name: 'index'
         });
@@ -39,6 +39,14 @@ export default {
                 const da = { name, pwd };
                 const data = await KKL.Ajax.post('user/login', da);
                 KKL.cookie.set('kkl_ui_token', data.token);
+                let { query } = this.$route;
+                if(query.redirect){
+                    this.$router.replace({
+                        name: query.redirect,
+                        query: query.query && JSON.parse(query.query) || {}
+                    });
+                    return;
+                }
                 this.$router.push({
                     name: 'index'
                 });

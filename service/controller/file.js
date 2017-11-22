@@ -9,6 +9,21 @@ const path = require('path');
 const childProcess = require('child_process');
 const utils = require('../mysql/utils');
 
+const execCli = async cmd => {
+    await new Promise((resolve, reject) => {
+        childProcess.exec(cmd, (err, data) => {
+            // console.log(111);
+            if (err) {
+                return reject(err);
+            }
+            resolve(data);
+        });
+    });
+};
+
+const mkdirSync = async (dir) => {
+    await execCli(`mkdir -p ${dir}`);
+};
 
 async function uploadFile(Path, file) {
     const result = await new Promise((resolve, reject) => {
@@ -22,17 +37,7 @@ async function uploadFile(Path, file) {
     });
     return result;
 }
-const execCli = async cmd => {
-    await new Promise((resolve, reject) => {
-        childProcess.exec(cmd, (err, data) => {
-            // console.log(111);
-            if (err) {
-                return reject(err);
-            }
-            resolve(data);
-        });
-    });
-};
+
 // 获取某一路径下的所有js文件路径以及名称
 const getDirSubFileList = (Path, filename) => {
     let filesList = [];
@@ -75,8 +80,9 @@ const getDirSubFileList = (Path, filename) => {
     return FileList;
 };
 const getHtml = async(ctx, next) => {
+    let type = 'web';
     let projectId = ctx.query.projectId;
-    let Path = path.resolve(__dirname, `../uploadFile/${projectId}/`);
+    let Path = path.resolve(__dirname, `../uploadFile/${projectId}/${type}/`);
     let list = [];
     let allData = await utils.query();
     allData = JSON.parse(allData);
@@ -96,7 +102,7 @@ const getHtml = async(ctx, next) => {
         console.log(err);
     }
     list.forEach(page => {
-        page.relativePath = `${projectId}/${page.relativePath}`;
+        page.relativePath = `${projectId}/${type}/${page.relativePath}`;
     });
     const data = {
         list,
@@ -110,6 +116,7 @@ const getHtml = async(ctx, next) => {
 };
 const saveFile = async(ctx, next) => {
     console.log(ctx.req);
+    let type = 'web';
     try {
         let {
             originalname
@@ -122,12 +129,12 @@ const saveFile = async(ctx, next) => {
         let fullName = `${Date.now()}_${name}`;
         try {
             if (!fs.statSync(uploadFilePath).isDirectory()) {
-                fs.mkdirSync(uploadFilePath);
+                await mkdirSync(uploadFilePath);
             }
         } catch (err) {
-            fs.mkdirSync(uploadFilePath);
+            await mkdirSync(uploadFilePath);
         }
-        let toPath = `${uploadFilePath}/${projectId}`;
+        let toPath = `${uploadFilePath}/${projectId}/${type}`;
         let data = {
             name,
             fullName,
@@ -135,10 +142,10 @@ const saveFile = async(ctx, next) => {
         };
         try {
             if (!fs.statSync(toPath).isDirectory()) {
-                fs.mkdirSync(toPath);
+                await mkdirSync(toPath);
             }
         } catch (err) {
-            fs.mkdirSync(toPath);
+            await mkdirSync(toPath);
         }
         await uploadFile(data.path, catchFile);
         if (fullName.endsWith('.zip')) {

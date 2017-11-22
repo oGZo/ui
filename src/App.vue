@@ -4,7 +4,8 @@
             {{user.name}}，你好
             <span class="logout" @click="confirmLogin">退出</span>
         </div>
-            <router-view></router-view>
+        <div class="user-info" v-else @click="toLogin">你还未登录，点击<span class="login">登录</span></div>
+        <router-view></router-view>
 
     </div>
 </template>
@@ -50,6 +51,15 @@ export default {
                 this.logout();
             }
         },
+        toLogin() {
+            this.$router.push({
+                name: 'login',
+                query: {
+                    redirect: this.$route.name,
+                    paramter: JSON.stringify(this.$route.query)
+                }
+            });
+        },
         logout() {
             KKL.cookie.clear();
             this.$router.push({
@@ -67,7 +77,7 @@ export default {
     padding: 0 20px;
     background-color: #f5f5f5;
 }
-.logout {
+.logout, .login {
     cursor: pointer;
 }
 </style>
