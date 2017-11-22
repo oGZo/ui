@@ -42,11 +42,11 @@ const router = new Router({
     mode: 'hash',
 });
 router.beforeEach((to,from,next) => {
-    if(to.name !== 'login' && !KKL.cookie.get('kkl_ui_token')){
-        return next({
-            name: 'login'
-        });
-    }
+    // if(to.name !== 'login' && !KKL.cookie.get('kkl_ui_token')){
+    //     return next({
+    //         name: 'login'
+    //     });
+    // }
     next();
 });
 export default router;

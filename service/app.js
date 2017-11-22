@@ -29,11 +29,11 @@ app.use(async (ctx, next) => {
             // return;
         }catch(err){
             console.log(err);
-            ctx.redirect('/page/#login');
+            // ctx.redirect('/page/#login');
         }
     }else if(ctx.path.slice(0,5) !== '/page' && ctx.path.slice(0,6) !== '/page/'){
         if(nOAuthorizations.indexOf(ctx.path) === -1){
-            ctx.redirect('/page/');
+            // ctx.redirect('/page/');
         }
     }
     await next();
@@ -54,10 +54,10 @@ const setRouter = () => {
 
 console.log(router);
 
-app
-    .use(jwtKoa({ secret }).unless({
-        path: ['/','/page',/^\/page\/\.*/,/^\/user\/login/] // 数组中的路径不需要通过jwt验证
-    }));
+// app
+//     .use(jwtKoa({ secret }).unless({
+//         path: ['/','/page',/^\/page\/\.*/,/^\/user\/login/] // 数组中的路径不需要通过jwt验证
+//     }));
 
 setRouter();
 

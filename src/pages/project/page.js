@@ -13,6 +13,7 @@ export default {
             projectName: '',
             projectId,
             loading: true,
+            isLogin: KKL.isLogin(),
             action: `${CONFIG.url || ''}/file/saveFile`
         };
     },

@@ -26,18 +26,23 @@ export default {
             return !!KKL.cookie.get('kkl_ui_token') && !!route;
         }
     },
+    watch: {
+        $route(){
+            this.getUserInfo();
+        }
+    },
     components: {
         // KDialog,
     },
     created() {
-        if(this.isLogin){
-            this.getUserInfo();
-        }
+        this.getUserInfo();
     },
     methods: {
         async getUserInfo() {
-            const user = await KKL.Ajax.get('user/getUserInfo');
-            this.user.name = user.name;
+            if(KKL.isLogin() && !this.user.name){
+                const user = await KKL.Ajax.get('user/getUserInfo');
+                this.user.name = user.name;
+            }
         },
         async confirmLogin() {
             const res = await this.$confirm('确认要退出？', '温馨提示');

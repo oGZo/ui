@@ -15,6 +15,7 @@
                 </div>
             </el-col>
             <el-col
+                v-if="isLogin"
                 :span="6"
                 @click.native="addProject"
                 class="add-project"

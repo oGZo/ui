@@ -6,7 +6,8 @@ export default {
     data() {
 
         return {
-            list: []
+            list: [],
+            isLogin: KKL.isLogin()
         };
     },
     created() {

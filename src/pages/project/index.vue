@@ -2,6 +2,7 @@
     <div class="index" v-loading.fullscreen.lock="loading">
         <h2>{{projectName}}项目</h2>
         <el-upload
+            v-if="isLogin"
             class="upload-demo"
             drag
             :action="action"

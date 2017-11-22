@@ -17,6 +17,19 @@ export default {
       }
     };
   },
+  computed: {
+    isLogin() {
+        let route = this.$route;
+        return !!KKL.cookie.get('kkl_ui_token') && !!route;
+    }
+  },
+  created () {
+      if(this.isLogin){
+        this.$router.replace({
+            name: 'index'
+        });
+      }
+  },
   methods: {
     submitForm(formName) {
       this.$refs[formName].validate(async valid => {
@@ -43,6 +56,7 @@ export default {
     },
     resetForm(formName) {
       this.$refs[formName].resetFields();
-    }
+    },
+
   }
 };
