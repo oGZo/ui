@@ -43,7 +43,7 @@ export default {
                 if(query.redirect){
                     this.$router.replace({
                         name: query.redirect,
-                        query: query.query && JSON.parse(query.query) || {}
+                        query: query.paramter && JSON.parse(query.paramter) || {}
                     });
                     return;
                 }
