@@ -11,7 +11,7 @@
     "sit": "npm run build -d sit",
     "prod": "npm run build -d prod",
     "stable": "npm run build -d stable",
-    "server": "node  service/app.js",
+    "server": "pm2 start service/app.js  --name='kkl-ui'",
     "lint": "eslint --ext .js,.vue src"
   },
   "dependencies": {
