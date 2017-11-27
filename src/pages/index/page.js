@@ -51,6 +51,31 @@ export default {
             }).catch(err => {
                 console.log(err);
             });
+        },
+        async updateProject(item) {
+            try{
+                let confirmInfo = await this.$prompt('请输入项目新名字', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    inputValue: item.name,
+                    inputPlaceholder: '请输入名称',
+                    inputPattern: /.{2,20}/,
+                    inputErrorMessage: '名字必须为2-20个字符'
+                });
+                let name = confirmInfo.value.trim();
+                let data = {
+                    name,
+                    projectId: item.id
+                };
+                await KKL.Ajax.post('project/updateProject', data);
+                item.name = name;
+                this.$message({
+                    type: 'success',
+                    message: '修改成功!'
+                });
+            }catch(err){
+                console.log(err);
+            }
         }
     }
 };

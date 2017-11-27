@@ -29,7 +29,7 @@
                 <el-col
                     :span="8"
                     v-for="(item, index) in list"
-                    v-show="item.filename.indexOf(moduleName) > -1"
+                    v-show="item.filename.toLocaleLowerCase().indexOf(moduleName.toLocaleLowerCase()) > -1"
                     :key="item.filename"
                     class="item"
                     @click.native="toHtml(item)"

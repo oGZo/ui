@@ -36,6 +36,35 @@ const addProject = async(ctx) => {
         message: '创建成功'
     };
 };
+const updateProject = async(ctx) => {
+    const { name, projectId } = ctx.request.body;
+    let oldData = await utils.query();
+    oldData = JSON.parse(oldData);
+    console.log(oldData);
+    let projects = oldData.kkl_project;
+    let currentProject = null;
+    projects.forEach(project => {
+        if(project.id === +projectId){
+            currentProject = project;
+            project.name = name;
+            project.updateTime = Date.now();
+        }
+    });
+    if(!currentProject){
+        ctx.body = {
+            code: 3,
+            message: '该项目不存在'
+        };
+        return;
+    }
+    oldData.kkl_project = projects;
+    await utils.write(oldData);
+    ctx.body = {
+        data: currentProject,
+        code: 1,
+        message: '修改成功'
+    };
+};
 const getProjectList = async(ctx) => {
     let oldData = await utils.query();
     oldData = JSON.parse(oldData);
@@ -60,5 +89,6 @@ const getProjectList = async(ctx) => {
 
 module.exports = {
     post_addProject: addProject,
+    post_updateProject: updateProject,
     get_getProjectList: getProjectList,
 };

@@ -8,6 +8,9 @@
                 class="item"
             >
                 <div class="grid-content bg-purple">
+                    <div class="operation-area" v-if="isLogin">
+                        <i class="el-icon-edit" title="修改名称" @click.stop="updateProject(item)"></i>
+                    </div>
                     <h3>{{item.name}}项目</h3>
                     <p><span>创建者</span>{{item.creator}}</p>
                     <p><span>创建时间</span>{{item.createTime}}</p>
@@ -43,13 +46,27 @@ export default page;
 <style lang="less" scoped>
     @import './style.less';
 </style>
-<style lang="less">
+<style lang="less" scoped>
     @import '../../base.less';
     .index {
         padding: 20px;
     }
     .item {
         margin-bottom: 20px;
+        position: relative;
+        .operation-area {
+            position: absolute;
+            right: 20px;
+            top: 0px;
+            >i {
+                font-size: 14px;
+                opacity: 0.2;
+                &:hover {
+                    // color: @g-font-default-color;
+                    opacity: 1;
+                }
+            }
+        }
     }
     .grid-content{
         padding: 30px 20px;
