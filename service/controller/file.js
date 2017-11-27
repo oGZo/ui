@@ -80,8 +80,10 @@ const getDirSubFileList = (Path, filename) => {
     return FileList;
 };
 const getHtml = async(ctx, next) => {
-    let type = 'web';
-    let projectId = ctx.query.projectId;
+    let { type = 'web', projectId } = ctx.query;
+    if(type === 'all'){
+        type = '';
+    }
     let Path = path.resolve(__dirname, `../uploadFile/${projectId}/${type}/`);
     let list = [];
     let allData = await utils.query();
@@ -116,12 +118,11 @@ const getHtml = async(ctx, next) => {
 };
 const saveFile = async(ctx, next) => {
     console.log(ctx.req);
-    let type = 'web';
+    const { type = 'web', projectId } = ctx.req.body;
     try {
         let {
             originalname
         } = ctx.req.file;
-        const projectId = ctx.req.body.projectId;
         let name = originalname;
         let catchFilePath = ctx.req.file.path;
         let catchFile = fs.readFileSync(catchFilePath);

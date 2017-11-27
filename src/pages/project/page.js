@@ -3,16 +3,19 @@ import moment from 'moment';
 export default {
     name: 'index',
     data() {
-        const { projectId } = this.$route.query;
+        const { projectId, type = 'all' } = this.$route.query;
         const param = {
+            type,
             projectId
         };
         return {
+            type,
             param,
-            list: [],
-            projectName: '',
             projectId,
+            list: [],
             loading: true,
+            moduleName: '',
+            projectName: '',
             isLogin: KKL.isLogin(),
             action: `${CONFIG.url || ''}/file/saveFile`
         };
@@ -20,10 +23,22 @@ export default {
     created() {
         this.getPage();
     },
+    watch: {
+        type(type) {
+            this.$router.replace({
+                name: 'project',
+                query: {
+                    ...this.$route.query,
+                    type
+                }
+            });
+            this.handleClick();
+        }
+    },
     methods: {
         async getPage() {
-            const { projectId } = this;
-            const { list, projectName } = await KKL.Ajax.get('file/getHtml', { projectId });
+            const { projectId, type } = this;
+            const { list, projectName } = await KKL.Ajax.get('file/getHtml', { projectId, type });
             this.projectName = projectName;
             list.forEach(item => {
                 item.createdTime = moment(item.createdTime).format('YYYY-MM-DD HH:mm');
@@ -35,6 +50,11 @@ export default {
         toHtml(item) {
             console.log(item);
             location.href = `${location.protocol}//${location.hostname}:4001/${item.relativePath}`;
+        },
+        handleClick() {
+            this.param.type = this.type;
+            this.getPage();
+            // console.log(tab, event);
         },
         uploadBefore() {
             this.loading = true;
