@@ -169,7 +169,56 @@ const saveFile = async(ctx, next) => {
         throw err;
     }
 };
+const deleteFile = async (ctx) => {
+    // let type = 'web';
+    let { absolutePath } = ctx.request.body;
+    let Path = absolutePath.slice(0, -11);
+    try{
+        await execCli(`rm -rf ${Path}`);
+        ctx.body = {
+            data: {},
+            code: 1,
+            message: '删除成功'
+        };
+    }catch(err){
+        ctx.body = {
+            code: 0,
+            message: '删除失败'
+        };
+    }
+};
+
+
+const updateFileName = async (ctx) => {
+    let { absolutePath, oldName, newName } = ctx.request.body;
+    let Path = absolutePath.slice(0, -11);
+    let newPath = absolutePath.split(oldName)[0] + newName;
+    let isExist = await utils.isExist(newPath);
+    if(isExist){
+        ctx.body = {
+            code: 0,
+            message: '新名字已存在'
+        };
+        return;
+    }
+    try{
+        await execCli(`mv ${Path} ${newPath} && rm -rf ${Path}`);
+        ctx.body = {
+            data: {},
+            code: 1,
+            message: '修改成功'
+        };
+    }catch(err){
+        ctx.body = {
+            code: 0,
+            message: '修改失败'
+        };
+    }
+};
+
 module.exports = {
+    get_getHtml: getHtml,
     post_saveFile: saveFile,
-    get_getHtml: getHtml
+    post_deleteFile: deleteFile,
+    post_updateFileName: updateFileName
 };

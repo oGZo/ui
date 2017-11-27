@@ -26,7 +26,13 @@
                 <el-card :body-style="{ padding: '0px' }">
                     <div class="m-iframe" ></div>
                     <div style="padding: 14px;">
-                        <h3>{{item.filename}}</h3>
+                        <h3>{{item.filename}}
+
+                            <div class="operation-area" v-if="isLogin">
+                                <i class="el-icon-edit" title="修改名称" @click.stop="updateFileName(item)"></i>
+                                <i class="el-icon-delete" title="删除" @click.stop="deleteFile(item)"></i>
+                            </div>
+                        </h3>
                         <div class="bottom clearfix">
                         <time class="time">{{ item.createdTime }}</time>
                             <el-button type="text" class="button" >去查看</el-button>

@@ -92,5 +92,6 @@ const write = async(data) => {
 // init();
 module.exports = {
     query,
-    write
+    write,
+    isExist
 };

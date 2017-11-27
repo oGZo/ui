@@ -35,7 +35,7 @@ module.exports = {
         // FIXME    由于localhost3000 => localhost:3004 一直代理不成功  故开发页面直接调对应接口
         proxyTable: {
             '/kkl': {
-                target: `${urlObject.protocol}//${urlObject.host}${urlObject.path}`,
+                target: `http://127.0.0.1:4001`,
                 // changeOrigin: true,
                 logLevel: 'debug',
                 pathRewrite: {

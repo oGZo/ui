@@ -1,3 +1,5 @@
+@import '../../base.less';
+
 .index {
     padding: 20px;
 }
@@ -6,11 +8,26 @@ h2 {
     line-height: 40px;
 }
 .item {
+    position: relative;
     padding: 18px 0;
     cursor: pointer;
     h3 {
         font-size: 18px;
         line-height: 30px;
+
+    }
+    .operation-area {
+        position: absolute;
+        right: 18px;
+        top: 18px;
+        >i {
+            font-size: 14px;
+            margin: 0 5px;
+            color: @g-font-default-color;
+            &:hover {
+                color: @g-main-green;
+            }
+        }
     }
     .button {
         float: right;
