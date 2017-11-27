@@ -18,7 +18,7 @@
         <el-row :gutter="20">
             <el-col
                 :span="8"
-                v-for="item in list"
+                v-for="(item, index) in list"
                 :key="item.filename"
                 class="item"
                 @click.native="toHtml(item)"
@@ -30,7 +30,7 @@
 
                             <div class="operation-area" v-if="isLogin">
                                 <i class="el-icon-edit" title="修改名称" @click.stop="updateFileName(item)"></i>
-                                <i class="el-icon-delete" title="删除" @click.stop="deleteFile(item)"></i>
+                                <i class="el-icon-delete" title="删除" @click.stop="deleteFile(item, index)"></i>
                             </div>
                         </h3>
                         <div class="bottom clearfix">
