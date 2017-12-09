@@ -1,11 +1,11 @@
 // host   // + 主站host
 // setting  资料设置
 const dev = {
-    api: 'http://message.stable.ikuko.com:4001',
+    api: 'http://127.0.0.1:4001',
 };
 
 const stable = {
-    api: 'http://message.stable.ikuko.com:4001',
+    api: 'http://127.0.0.1:4001',
 };
 
 const sit = {

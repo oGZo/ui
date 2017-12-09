@@ -5,8 +5,8 @@
             <el-radio-group v-model="type" class="kkl-radio-group">
                 <el-radio-button label="all">全部</el-radio-button>
                 <el-radio-button label="web">pc端-设计</el-radio-button>
-                <el-radio-button label="wap">移动端-设计</el-radio-button>
                 <el-radio-button label="ue-web">pc端-交互</el-radio-button>
+                <el-radio-button label="wap">移动端-设计</el-radio-button>
                 <el-radio-button label="ue-wap">移动端-交互</el-radio-button>
             </el-radio-group><el-input v-model="moduleName" icon="search" placeholder="通过模块名称筛选" style="width: 200px;"></el-input>
         </div>
