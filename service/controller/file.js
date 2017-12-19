@@ -11,7 +11,7 @@ const utils = require('../mysql/utils');
 
 const execCli = async cmd => {
     await new Promise((resolve, reject) => {
-        childProcess.exec(cmd, (err, data) => {
+        childProcess.exec(cmd, {maxBuffer: 1 * 1024 * 1024}, (err, data) => {
             // console.log(111);
             if (err) {
                 return reject(err);
