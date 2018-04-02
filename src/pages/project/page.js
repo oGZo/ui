@@ -41,7 +41,8 @@ export default {
             const { list, projectName } = await KKL.Ajax.get('file/getHtml', { projectId, type });
             this.projectName = projectName;
             list.forEach(item => {
-                item.createdTime = moment(item.createdTime).format('YYYY-MM-DD HH:mm');
+                const date = new Date(new Date(item.createTime));
+                item.createdTime = moment(date).format('YYYY-MM-DD HH:mm');
             });
             this.list = list;
             this.loading = false;
